@@ -1,0 +1,24 @@
+{
+  "urdf_path": "so101_standin.urdf",
+  "tip_link": "gripper_frame_link",
+  "arm_joints": ["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll"],
+  "tool_axis_local": [1, 0, 0],
+  "calibration": {
+    "shoulder_pan":  {"sign": 1, "offset_deg": 0},
+    "shoulder_lift": {"sign": 1, "offset_deg": 0},
+    "elbow_flex":    {"sign": 1, "offset_deg": 0},
+    "wrist_flex":    {"sign": 1, "offset_deg": 0},
+    "wrist_roll":    {"sign": 1, "offset_deg": 0}
+  },
+  "workspace": {
+    "x": [-0.05, 0.40],
+    "y": [-0.30, 0.30],
+    "z": [0.01, 0.40]
+  },
+  "home_deg": {},
+  "joint_limit_margin_deg": 3.0,
+  "max_joint_speed_deg_s": 30.0,
+  "control_hz": 30.0,
+  "position_tol_mm": 2.0,
+  "approach_tol_deg": 3.0
+}

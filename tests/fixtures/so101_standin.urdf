@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+  TEST FIXTURE ONLY - NOT THE REAL SO-101.
+  Same joint names and topology as TheRobotStudio's so101_new_calib.urdf, with
+  rounded, approximate link lengths so the solver can be tested without
+  downloading the real model. Use the real URDF for anything that moves hardware.
+  Tool axis in gripper_frame_link is +X here.
+-->
+<robot name="so101_standin">
+  <link name="base_link"/>
+  <link name="shoulder_link"/>
+  <link name="upper_arm_link"/>
+  <link name="lower_arm_link"/>
+  <link name="wrist_link"/>
+  <link name="gripper_link"/>
+  <link name="gripper_frame_link"/>
+  <link name="moving_jaw_link"/>
+
+  <joint name="shoulder_pan" type="revolute">
+    <parent link="base_link"/><child link="shoulder_link"/>
+    <origin xyz="0 0 0.062" rpy="0 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-1.92" upper="1.92" effort="3" velocity="5"/>
+  </joint>
+
+  <joint name="shoulder_lift" type="revolute">
+    <parent link="shoulder_link"/><child link="upper_arm_link"/>
+    <origin xyz="0.03 0 0.054" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="-1.75" upper="1.75" effort="3" velocity="5"/>
+  </joint>
+
+  <joint name="elbow_flex" type="revolute">
+    <parent link="upper_arm_link"/><child link="lower_arm_link"/>
+    <origin xyz="0.028 0 0.113" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="-1.69" upper="1.69" effort="3" velocity="5"/>
+  </joint>
+
+  <joint name="wrist_flex" type="revolute">
+    <parent link="lower_arm_link"/><child link="wrist_link"/>
+    <origin xyz="0.135 0 0" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="-1.66" upper="1.66" effort="3" velocity="5"/>
+  </joint>
+
+  <joint name="wrist_roll" type="revolute">
+    <parent link="wrist_link"/><child link="gripper_link"/>
+    <origin xyz="0.061 0 0" rpy="0 0 0"/><axis xyz="1 0 0"/>
+    <limit lower="-2.74" upper="2.84" effort="3" velocity="5"/>
+  </joint>
+
+  <joint name="gripper_frame_joint" type="fixed">
+    <parent link="gripper_link"/><child link="gripper_frame_link"/>
+    <origin xyz="0.045 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- jaw is off the path to gripper_frame_link; the solver should ignore it -->
+  <joint name="gripper" type="revolute">
+    <parent link="gripper_link"/><child link="moving_jaw_link"/>
+    <origin xyz="0.02 0.02 0" rpy="0 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-0.17" upper="1.75" effort="3" velocity="5"/>
+  </joint>
+</robot>
